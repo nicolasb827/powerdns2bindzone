@@ -6,12 +6,24 @@ The PowerDNS to Bind Zone Generator is a simple PHP script to generate Bind-styl
 ### Supports the following record types:
 * A
 * CNAME
+* A
+* AAAA
 * MX
 * TXT
+* NULL
+* PTR
+* NS
+* SOA
+* SPF
+* CAA
+* DNSKEY
+* DS
+* SSHFP
+* SRV
 
 ## Environment
 * Linux
-* PHP 5.4 +
+* PHP 5.6 +
 * PowerDNS (with MySQL backend)
 
 ## Notes
