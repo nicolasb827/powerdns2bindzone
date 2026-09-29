@@ -1,7 +1,7 @@
-# PowerDNS to Bind Zone Generator
+# PowerDNS to ~~Bind~~Knot Zone Generator
 
 ## Overview
-The PowerDNS to Bind Zone Generator is a simple PHP script to generate Bind-style zone files from a PowerDNS MySQL backend. It is intended as a utility to make migrating zones from a PowerDNS server to a Bind server, not as a straight backup script. The generated zones use configurable name servers and create new SOA and serials, etc.
+The PowerDNS to ~~Bind~~Knot Zone Generator is a simple PHP script to generate shell commands about zones from a PowerDNS MySQL backend. It is intended as a utility to make migrating zones from a PowerDNS server to a ~~Bind~~Knot server, not as a straight backup script. The generated zones use configurable name servers and create new SOA and serials, etc.
 
 ### Supports the following record types:
 * A
@@ -39,27 +39,18 @@ $zone_adm = 'support.example.com';
 You can specify as many name servers in $zone_ns as you need, as long as the first value is the primary name server.
 Run the script. It will create a tmp directory in the location you run it from and save the zone files there.
 
-## Example Generated Zone
+## Example Generated Zone (fake data)
 ```shell
-$TTL 43200
-
-@ IN SOA ns1.example.com. support.example.com. (
-             1374091666
-             7200
-             3600
-             604800
-             43200 )
-
-  IN NS      ns1.example.com.
-  IN NS      ns2.example.com.
-
-  IN MX 10   mx1.mymailhost.tld.
-
-example.com.         IN A xx.xx.xx.xx
-ns1.example.com      IN A xx.xx.xx.xx
-ns2.example.com      IN A xx.xx.xx.xx
-
-www                  IN CNAME example.com.
+knotc zone-begin example.com
+knotc zone-set example.com. @ IN SOA ns1.example.net dns.example.com 2021010700 14400 7200 3600000 86400
+knotc zone-set example.com. @ IN NS ns1.example.net.
+knotc zone-set example.com. @ IN NS ns2.example.net.
+knotc zone-set example.com. @ IN NS ns3.example.net.
+knotc zone-set example.com. www 3600 A 192.168.1.1
+knotc zone-set example.com. @ 3600 A 192.168.1.1
+knotc zone-set example.com. _domainkey 3600 TXT "v=DKIM1; t=y; o=~"
+knotc zone-set example.com. www 3600 AAAA fc00::1
+knotc zone-commit example.com.
 ```
 ## License
 This project is BSD (2 clause) licensed.
