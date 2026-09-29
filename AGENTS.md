@@ -12,12 +12,12 @@ This is a migration utility, not a backup tool: it regenerates SOA/serials and u
 ## Running
 
 ```sh
-php powerdns2bindzone.php   # or: php powerdns2knot.php
+php powerdns2bindzone.php   # or: php56 powerdns2knot.php on rhel compatible servers
 ```
 
 - Requires PHP 5.6+ with the `mysqli` extension. No framework, composer, build step, tests, or CI.
 - The shebang `#!/bin/env php56` is non-standard and usually does not exist — invoke via `php` explicitly.
-- Output directories (`./bind/`, `./knot/`) are created relative to the **current working directory**, not the script location.
+- powerdns2bindzone.php is not used here, we keep it for memory
 
 ## Configuration
 
@@ -33,4 +33,4 @@ All configuration lives in `gmysql.conf` (DB credentials, `$zone_ns`, `$zone_adm
 
 ## Verification
 
-There is no test suite. To verify changes, run the script against a PowerDNS MySQL database and inspect the generated zone files in `./bind/` or `./knot/`.
+There is no test suite. To verify changes, run the script against a PowerDNS MySQL database and inspect the generated zone files in knot.sh.
